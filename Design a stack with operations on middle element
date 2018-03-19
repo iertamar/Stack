@@ -1,0 +1,87 @@
+
+
+class myStack{
+    dll head ;
+    dll mid ;
+    int count ;
+    myStack()
+    {
+        count = 0;
+    }
+}
+
+class dll{
+    dll prev;
+    int data;
+    dll next;
+    dll(int d){
+        data = d;
+    }
+}
+
+    public class hello {
+
+    void push(myStack ms , int x)
+    {
+        dll d = new dll(x);
+        d.prev = null;
+        d.next = ms.head ;
+        ms.count++;
+        if(ms.count==1)
+            ms.mid = d;
+        else
+        {
+            ms.head.prev = d ;
+            if((ms.count%2)!=0)
+                ms.mid = ms.mid.prev;
+        }
+        ms.head = d ;
+    }
+
+    int pop(myStack ms)
+    {
+        if(ms.count==0)
+            return -1;
+        else if(ms.count==1)
+        {
+            ms.count = 0;
+            int data = ms.head.data;
+            ms.head = null ;
+            ms.mid = null ;
+            return data ;
+        }
+        else
+        {
+           ms.count--;
+           if((ms.count%2)==0)
+           {
+               ms.mid = ms.mid.next ;
+           }
+           int data = ms.head.data ;
+           ms.head.next.prev = null ;
+           ms.head = ms.head.next ;
+           return data ;
+        }
+
+
+    }
+
+        int middle(myStack ms)
+        {
+            if(ms.count ==0)
+                return -1;
+            return ms.mid.data ;
+        }
+
+    public static void main(String[] args) {
+        hello h = new hello();
+        myStack ms = new myStack();
+        h.push(ms , 11);
+        h.push(ms , 12);
+        h.push(ms , 13);
+        h.push(ms , 122);
+        System.out.println(h.pop(ms));
+        System.out.println(h.middle(ms));;
+    }
+
+}

@@ -1,0 +1,37 @@
+import java.util.*;
+
+class GFG {
+	public static void main (String[] args) {
+		Scanner sc = new Scanner(System.in);
+		String s  = sc.next();
+		String res ="";
+		Stack<String> st = new Stack<>();
+		for(int i = 0; i<s.length();i++)
+		{
+		    char c = s.charAt(i) ;
+		    if(c=='-' || c=='+' || c=='*' || c=='/' || c=='^')
+		     st.push(Character.toString(c));
+		    else if(!st.isEmpty() )
+		    {
+		        if(!((st.peek()).equals("-")) && !((st.peek()).equals("+")) && !((st.peek()).equals("*")) && !((st.peek()).equals("/")) && !((st.peek()).equals("^")))
+		        {
+		            res = res + st.pop() + c + st.pop() ;
+		            while(!st.isEmpty() && !((st.peek()).equals("-")) && !((st.peek()).equals("+")) && !((st.peek()).equals("*")) && !((st.peek()).equals("/")) && !((st.peek()).equals("^")))
+		            {
+		                res = st.pop() + res + st.pop();
+		            }
+		            st.push(res);
+		            res = "";
+		        }
+		        else
+		        {
+		            st.push(Character.toString(c));
+		        }
+		    }
+		    
+		}
+		System.out.println(st.pop());
+		
+		
+	}
+}
